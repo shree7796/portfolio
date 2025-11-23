@@ -17,20 +17,20 @@ navLinks.forEach(link => {
         e.preventDefault();
         const targetId = link.getAttribute('href');
         const targetSection = document.querySelector(targetId);
-        
+
         if (targetSection) {
             const navHeight = document.querySelector('.navbar').offsetHeight;
             const targetPosition = targetSection.offsetTop - navHeight;
-            
+
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
-            
+
             // Close mobile menu if open
             const navLinksContainer = document.getElementById('navLinks');
-            if (navLinksContainer.classList.contains('open')) {
-                navLinksContainer.classList.remove('open');
+            if (navLinksContainer.classList.contains('active')) {
+                navLinksContainer.classList.remove('active');
             }
         }
     });
@@ -40,12 +40,12 @@ navLinks.forEach(link => {
 const highlightActiveSection = () => {
     const scrollPosition = window.pageYOffset;
     const navHeight = document.querySelector('.navbar').offsetHeight;
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop - navHeight - 100;
         const sectionBottom = sectionTop + section.offsetHeight;
         const sectionId = section.getAttribute('id');
-        
+
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -78,11 +78,11 @@ const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navLinksContainer = document.getElementById('navLinks');
 
 mobileMenuToggle.addEventListener('click', () => {
-    navLinksContainer.classList.toggle('open');
-    
+    navLinksContainer.classList.toggle('active');
+
     // Toggle icon between menu and X
     const icon = mobileMenuToggle.querySelector('i');
-    const isOpen = navLinksContainer.classList.contains('open');
+    const isOpen = navLinksContainer.classList.contains('active');
     icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
     lucide.createIcons();
 });
@@ -90,7 +90,7 @@ mobileMenuToggle.addEventListener('click', () => {
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.navbar')) {
-        navLinksContainer.classList.remove('open');
+        navLinksContainer.classList.remove('active');
         const icon = mobileMenuToggle.querySelector('i');
         icon.setAttribute('data-lucide', 'menu');
         lucide.createIcons();
@@ -134,7 +134,7 @@ let lastScrollTop = 0;
 
 const handleNavbarScroll = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // Add background when scrolled
     if (scrollTop > 50) {
         navbar.style.background = 'rgba(10, 14, 39, 0.95)';
@@ -143,7 +143,7 @@ const handleNavbarScroll = () => {
         navbar.style.background = 'rgba(10, 14, 39, 0.8)';
         navbar.style.boxShadow = 'none';
     }
-    
+
     lastScrollTop = scrollTop;
 };
 
@@ -159,16 +159,16 @@ projectCards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
+
         const angleX = (y - centerY) / 20;
         const angleY = (centerX - x) / 20;
-        
+
         card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-5px)`;
     });
-    
+
     card.addEventListener('mouseleave', () => {
         card.style.transform = '';
     });
@@ -180,10 +180,10 @@ projectCards.forEach(card => {
 window.addEventListener('load', () => {
     // Initialize icons
     lucide.createIcons();
-    
+
     // Set initial active nav link
     highlightActiveSection();
-    
+
     // Add animation delay to hero elements
     const heroElements = document.querySelectorAll('.hero-content > *');
     heroElements.forEach((el, index) => {
@@ -210,12 +210,12 @@ const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLe
 document.addEventListener('keydown', (e) => {
     konamiCode.push(e.key);
     konamiCode = konamiCode.slice(-konamiSequence.length);
-    
+
     if (konamiCode.join('') === konamiSequence.join('')) {
         // Easter egg triggered - add extra space effects
         const space = document.querySelector('.space-background');
         space.style.animation = 'nebula-drift 5s ease-in-out infinite alternate';
-        
+
         // Show a fun message
         console.log('🚀 Warp speed activated! You found the secret code!');
     }
