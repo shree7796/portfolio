@@ -2085,3 +2085,95 @@ section {
     color: var(--accent-secondary);
     text-decoration: underline;
 }
+
+/* ===========================
+   Certifications Section
+=========================== */
+
+.hero-certification{
+display:inline-flex;
+align-items:center;
+gap:10px;
+margin-top:18px;
+padding:10px 18px;
+border-radius:50px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+font-size:.95rem;
+font-weight:600;
+backdrop-filter:blur(10px);
+}
+
+.certification-card{
+display:flex;
+align-items:center;
+gap:50px;
+padding:40px;
+flex-wrap:wrap;
+}
+
+.certification-image img{
+width:220px;
+border-radius:20px;
+transition:.3s;
+}
+
+.certification-image img:hover{
+transform:scale(1.05);
+}
+
+.certification-content{
+flex:1;
+}
+
+.certification-content h3{
+font-size:2rem;
+margin-bottom:10px;
+}
+
+.issuer{
+margin-bottom:20px;
+opacity:.8;
+}
+
+.cert-description{
+line-height:1.8;
+margin-bottom:25px;
+}
+
+.cert-skills{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-bottom:30px;
+}
+
+.cert-skills span{
+padding:10px 18px;
+border-radius:30px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+}
+
+.cert-buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+@media(max-width:768px){
+
+.certification-card{
+flex-direction:column;
+text-align:center;
+}
+
+.certification-image img{
+width:180px;
+}
+
+.hero-certification{
+justify-content:center;
+}
+
+}
